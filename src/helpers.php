@@ -10,7 +10,7 @@ if (! function_exists('glide')) {
     function glide(string $src, array $params = []): string
     {
         // 1. Merge with default parameters from config
-        $params = array_merge(config('glide.defaults', []), $params);
+        $params = array_merge(config('glide-helper.defaults', []), $params);
 
         // 2. Handle external URLs
         if (Str::startsWith($src, ['http://', 'https://']) && ! Str::contains($src, asset(''))) {
@@ -41,11 +41,11 @@ if (! function_exists('glide')) {
         $hash = md5($sourcePath.filemtime($sourcePath).json_encode($params));
         $hashedName = "{$hash}.{$extension}";
 
-        $outputRelativePath = config('glide.output_dir', 'manipulated')."/{$hashedName}";
+        $outputRelativePath = config('glide-helper.output_dir', 'manipulated')."/{$hashedName}";
         $outputPath = Storage::disk('public')->path($outputRelativePath);
 
         // 8. Create output dir if not exists
-        Storage::disk('public')->makeDirectory(config('glide.output_dir', 'manipulated'));
+        Storage::disk('public')->makeDirectory(config('glide-helper.output_dir', 'manipulated'));
 
         // 9. Generate if not already created
         if (! file_exists($outputPath)) {
