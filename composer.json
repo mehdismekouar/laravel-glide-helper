@@ -1,0 +1,47 @@
+{
+    "name": "mehdismekouar/laravel-glide-helper",
+    "description": "A Laravel helper for image manipulation using Spatie Glide",
+    "keywords": [
+        "mehdismekouar",
+        "laravel",
+        "laravel-glide-helper"
+    ],
+    "homepage": "https://github.com/mehdismekouar/laravel-glide-helper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mehdi Mekouar",
+            "email": "contact@mehdimekouar.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "spatie/laravel-glide": "^3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0|^10.0",
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mehdismekouar\\LaravelGlideHelper\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mehdismekouar\\LaravelGlideHelper\\LaravelGlideHelperServiceProvider"
+            ],
+            "aliases": {
+                "LaravelGlideHelper": "Mehdismekouar\\LaravelGlideHelper\\Facades\\LaravelGlideHelper"
+            }
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
