@@ -22,7 +22,7 @@ Install the package via Composer:
 composer require mehdismekouar/laravel-glide-helper
 ```
 
-Publish the config file:
+Optionally, publish the config file:
 
 ```bash
 php artisan vendor:publish --tag="laravel-glide-helper-config"
