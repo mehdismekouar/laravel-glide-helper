@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\Glide\GlideImage;
+use League\Glide\ServerFactory;
 
 if (! function_exists('glide')) {
     function glide(string $src, array $params = []): string
@@ -49,9 +49,19 @@ if (! function_exists('glide')) {
 
         // 9. Generate if not already created
         if (! file_exists($outputPath)) {
-            GlideImage::create($sourcePath)
-                ->modify($params)
-                ->save($outputPath);
+            $glideConfig = ['driver' => config('glide-helper.driver', 'gd')];
+
+            // Watermarks are read by Glide from their own folder
+            if (isset($params['mark'])) {
+                $glideConfig['watermarks'] = dirname($params['mark']);
+                $params['mark'] = basename($params['mark']);
+            }
+
+            $image = (new ServerFactory($glideConfig))
+                ->getApi()
+                ->run(file_get_contents($sourcePath), $params);
+
+            file_put_contents($outputPath, $image);
         }
 
         return Storage::disk('public')->url($outputRelativePath);

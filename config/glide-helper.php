@@ -8,4 +8,5 @@ return [
         'fit' => 'max'
     ],
     'output_dir' => 'manipulated',
+    'driver' => 'gd', // gd or imagick
 ];
